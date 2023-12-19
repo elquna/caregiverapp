@@ -19,7 +19,7 @@
             </div>
             <div class="content-body">
                 <!-- Book Appointment -->
-                <section id="book-appointment">
+         
                     
 
 
@@ -43,14 +43,14 @@
                                     <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr>
-                                                <th>General</th>
-                                                <th id="location" style="color:orange">Location</th>
-                                                <th id="advanced" >Advanced</th>
-                                                <th id="preferences" >Preferences</th>
+                                                <th id="general"  style="cursor:pointer" >General</th>
+                                                <th id="location"  style="cursor:pointer" >Location</th>
+                                                <th id="advanced" style="cursor:pointer" onclick="loadAdvancedFormForEmployee()" >Advanced</th>
+                                                <th id="certification"  style="cursor:pointer"  >Certification</th>
+                                                <!--<th id="preferences" >Preferences</th>
                                                 <th id="rvv" >RVV</th>
-                                                <th id="certification" >Certification</th>
                                                 <th id="admin" >Grant admin access</th>
-                                                <th id="notes" >Notes</th>
+                                                <th id="notes" >Notes</th>-->
                                             </tr>
                                         </thead>
                                         <tbody>

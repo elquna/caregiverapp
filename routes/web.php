@@ -27,6 +27,9 @@ Route::get('dashboard/viewzones', [LogicController::class,'viewzones'])->name('v
 Route::post('agency/addemployeegeneral', [LogicController::class,'addemployeegeneral'])->name('addemployeegeneral');
 Route::get('dashboard/employee/update', [LogicController::class,'dashboard_employee_update'])->name('dashboard_employee_update');
 Route::post('agency/updatelocationemployee', [LogicController::class,'updatelocationemployee']);
+Route::get('agency/loadadvancedformforemployee', [LogicController::class,'loadadvancedformforemployee']);
+
+
 
 
 

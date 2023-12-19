@@ -284,5 +284,35 @@ class LogicController extends Controller
   }
 
 
+  public function viewemployees()
+  {
+    if(!session('id'))
+    {
+      return redirect()->route('adminlogin');
+    }
+    $employees = Employee::where('agency_id', session('agency_id'))->get();
+    return view('dashboard.viewemployees')->with(['timezones'=>$employees]);
+  }
+
+  public function loadadvancedformforemployee(Request $request)
+  {
+    if(session('id'))
+    {
+      $employee = Employee::where('addedsecond', session("addedsecond"))->first();
+      $user = User::where('id',session('id'))->first();
+      $zones = Zone::where('agency_id', session('agency_id'))->get();
+      $user = User::where('id',session('id'))->first();
+      $agency = Agency::where('id', $user->agency_id)->first();
+     
+    
+
+     return view('dashboard.dashboard_employee_advanced_form')->with([ 'employee'=>$employee, 'addedsecond'=>session("addedsecond"), 'staff'=>$user, 'zones'=>$zones,  'agency'=>$agency]);
+    }
+    else{
+        return redirect()->route('adminlogin');
+    }
+  }
+
+
 
 }

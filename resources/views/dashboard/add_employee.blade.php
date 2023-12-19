@@ -43,14 +43,14 @@
                                     <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr>
-                                                <th>General</th>
-                                                <th>Location</th>
-                                                <th>Advanced</th>
-                                                <th>Preferences</th>
-                                                <th>RVV</th>
-                                                <th>Certification</th>
-                                                <th>Grant admin access</th>
-                                                <th>Notes</th>
+                                            <th>General</th>
+                                                <th id="location" >Location</th>
+                                                <th id="advanced" >Advanced</th>
+                                                <th id="certification" >Certification</th>
+                                                <!--<th id="preferences" >Preferences</th>
+                                                <th id="rvv" >RVV</th>
+                                                <th id="admin" >Grant admin access</th>
+                                                <th id="notes" >Notes</th>-->
                                             </tr>
                                         </thead>
                                         <tbody>
