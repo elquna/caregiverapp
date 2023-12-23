@@ -296,23 +296,26 @@ class LogicController extends Controller
 
   public function loadadvancedformforemployee(Request $request)
   {
-    if(session('id'))
-    {
+     $this->sessionchecker();
       $employee = Employee::where('addedsecond', session("addedsecond"))->first();
       $user = User::where('id',session('id'))->first();
       $zones = Zone::where('agency_id', session('agency_id'))->get();
       $user = User::where('id',session('id'))->first();
       $agency = Agency::where('id', $user->agency_id)->first();
-     
-    
-
      return view('dashboard.dashboard_employee_advanced_form')->with([ 'employee'=>$employee, 'addedsecond'=>session("addedsecond"), 'staff'=>$user, 'zones'=>$zones,  'agency'=>$agency]);
-    }
-    else{
-        return redirect()->route('adminlogin');
-    }
   }
 
-
+  public function updateemployeeadvanced(Request $request)
+  {
+    $this->sessionchecker();
+    $employee = Employee::where('addedsecond', $request->addedsecond)->first();
+    $employee->phone = $request->phone;
+    $employee->agency_employer_id = $request->agency_employer_id;
+    $employee->external_code_1 = $request->external_code_1;
+    $employee->external_code_2 = $request->external_code_2;
+    $employee->how_to_notify = $request->how_to_notify;
+    $employee->notify_when = $request->notify_when;
+    $employee->save();
+  }
 
 }

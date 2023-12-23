@@ -44,7 +44,7 @@
                                         <thead>
                                             <tr>
                                                 <th id="general"  style="cursor:pointer" >General</th>
-                                                <th id="location"  style="cursor:pointer" >Location</th>
+                                                <th id="location"  style="cursor:pointer; background:pink" >Location</th>
                                                 <th id="advanced" style="cursor:pointer" onclick="loadAdvancedFormForEmployee()" >Advanced</th>
                                                 <th id="certification"  style="cursor:pointer"  >Certification</th>
                                                 <!--<th id="preferences" >Preferences</th>

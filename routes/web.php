@@ -28,6 +28,10 @@ Route::post('agency/addemployeegeneral', [LogicController::class,'addemployeegen
 Route::get('dashboard/employee/update', [LogicController::class,'dashboard_employee_update'])->name('dashboard_employee_update');
 Route::post('agency/updatelocationemployee', [LogicController::class,'updatelocationemployee']);
 Route::get('agency/loadadvancedformforemployee', [LogicController::class,'loadadvancedformforemployee']);
+Route::post('agency/updateemployeeadvanced', [LogicController::class,'updateemployeeadvanced']);
+
+
+
 
 
 
@@ -50,23 +54,15 @@ Route::post('agency/updatestageone', [LogicController::class,'updatestageone'])-
 Route::get('manage/managemember', [LogicController::class,'managemember'])->name('managemember');
 Route::get('dashboard/view_members', [LogicController::class,'viewmembers'])->name('viewmembers');
 Route::post('agency/processeditemployee', [LogicController::class,'processeditemployee'])->name('processeditemployee');
-
-
 Route::post('agency/configuration', [LogicController::class,'configuration'])->name('configuration');
 Route::post('agency/notification', [LogicController::class,'notification'])->name('notification');
 Route::post('agency/threshold', [LogicController::class,'threshold'])->name('threshold');
-
-
 Route::post('agency/processaddemployee', [LogicController::class,'processaddemployee'])->name('processaddemployee');
 Route::post('agency/updateaddemployeelocation', [LogicController::class,'updateaddemployeelocation'])->name('updateaddemployeelocation');
 Route::post('agency/updateaddemployeeadvance', [LogicController::class,'updateaddemployeeadvance'])->name('updateaddemployeeadvance');
 Route::post('agency/updatepreference', [LogicController::class,'updatepreference'])->name('updatepreference');
 Route::post('agency/updatecertification', [LogicController::class,'updatecertification'])->name('updatecertification');
-
 Route::get('dashboard/edit_employee_data/locale/english/{holder}', [LogicController::class,'editemployee'])->name('editemployee');
-
-
-
 Route::post('members/addmembers', [LogicController::class,'addmembers'])->name('addmembers');
 Route::post('members/updatememberlocation', [LogicController::class,'updatememberlocation'])->name('updatememberlocation');
 Route::post('members/updatememberadvance', [LogicController::class,'updatememberadvance'])->name('updatememberadvance');
