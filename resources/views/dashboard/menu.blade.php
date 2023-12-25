@@ -23,7 +23,7 @@
                     <ul class="menu-content">
                         <li><a class="menu-item" href="{{route('addemployee',['holder'=>time()])}}"><i></i><span>Add Employee</span></a>
                         </li>
-                        <li><a class="menu-item" href="{{route('viewemployee')}}"><i></i><span>View Employers</span></a>
+                        <li><a class="menu-item" href="{{route('viewemployees')}}"><i></i><span>View Employees</span></a>
                         </li>
                         
                     </ul>

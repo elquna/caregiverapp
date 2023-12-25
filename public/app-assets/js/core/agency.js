@@ -416,17 +416,39 @@ function updateEmployeeAdvanced(addedsecond)
 
  }
  xml.send(fd);
- loadFormForCertificate()
+ loadCertifications();
   
 }
 
 
 
-function  loadFormForCertificate()
+
+
+
+function loadCertifications()
 {
-  
-}
+  var url = site + "/agency/loadcertifications";
+  var xml = new XMLHttpRequest();
+  var t = document.getElementById('t_').value;
+  var xml = new XMLHttpRequest();
+  xml.open("GET", url, true);
+   xml.setRequestHeader("X-CSRF-TOKEN", t);
+    xml.onreadystatechange = function()
+    {
+        if(xml.status == 419)
+        {
+          location.reload();
+        }
+       if(xml.readyState == 4 && xml.status == 200)
+       {
+          resetBackgrounds();
+         document.getElementById("book-appointment").innerHTML = xml.responseText;
+         document.getElementById("certification").style.background = "pink"
+       }
 
+    }
+    xml.send();
+}
 
 
 

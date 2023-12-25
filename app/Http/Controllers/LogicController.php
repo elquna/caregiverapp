@@ -15,6 +15,7 @@ use Session;
 use URL;
 use App\Models\Zone;
 use App\Models\Timezone;
+use App\Models\ Employeecertification;
 
 
 class LogicController extends Controller
@@ -291,7 +292,27 @@ class LogicController extends Controller
       return redirect()->route('adminlogin');
     }
     $employees = Employee::where('agency_id', session('agency_id'))->get();
-    return view('dashboard.viewemployees')->with(['timezones'=>$employees]);
+    foreach($employees as $one)
+    {
+      $state = State::where('id', $one->state_id)->first();
+      $city = City::where('id', $one->city_id)->first();
+      $zone = Zone::where('id',$one->zone_id)->first();
+   
+
+      $one->city = ($city == NULL)? "" : $city->name;
+      $one->state = ($state == NULL)? "" : $state->name;
+      $one->zone = ($zone == NULL)? "" : $zone->name;
+      
+    }
+    return view('dashboard.view_employees')->with(['emp'=>$employees]);
+  }
+
+  public function view_employee_details($addedsecond)
+  {
+    
+     session(['addedsecond'=>$addedsecond]);
+      return redirect()->route('dashboard_employee_update');
+
   }
 
   public function loadadvancedformforemployee(Request $request)
@@ -316,6 +337,18 @@ class LogicController extends Controller
     $employee->how_to_notify = $request->how_to_notify;
     $employee->notify_when = $request->notify_when;
     $employee->save();
+  }
+
+  public function loadcertifications(Request $request)
+  {
+    $this->sessionchecker();
+    $employee = Employee::where('addedsecond', session("addedsecond"))->first();
+    $user = User::where('id',session('id'))->first();
+    $zones = Zone::where('agency_id', session('agency_id'))->get();
+    $user = User::where('id',session('id'))->first();
+    $agency = Agency::where('id', $user->agency_id)->first();
+    $certifications =  Employeecertification::where('addedsecond',$user->addedsecond)->get();
+    return view('dashboard.employee_cerifications')->with(['certifications'=>$certifications, 'employee'=>$employee, 'addedsecond'=>session("addedsecond"), 'staff'=>$user, 'zones'=>$zones,  'agency'=>$agency]);
   }
 
 }

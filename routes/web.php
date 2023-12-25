@@ -29,6 +29,12 @@ Route::get('dashboard/employee/update', [LogicController::class,'dashboard_emplo
 Route::post('agency/updatelocationemployee', [LogicController::class,'updatelocationemployee']);
 Route::get('agency/loadadvancedformforemployee', [LogicController::class,'loadadvancedformforemployee']);
 Route::post('agency/updateemployeeadvanced', [LogicController::class,'updateemployeeadvanced']);
+Route::get('dashboard/view/employees', [LogicController::class,'viewemployees'])->name('viewemployees');
+Route::get('view_employee_details/{addedsecond}', [LogicController::class,'view_employee_details'])->name('view_employee_details');
+Route::get('agency/loadcertifications', [LogicController::class,'loadcertifications']);
+
+
+
 
 
 
@@ -38,7 +44,7 @@ Route::post('agency/updateemployeeadvanced', [LogicController::class,'updateempl
 
 
 Route::get('dashboard/add_employee/{holder}', [LogicController::class,'addemployee'])->name('addemployee');
-Route::get('dashboard/view_employee', [LogicController::class,'viewemployees'])->name('viewemployee');
+
 Route::get('dashboard/messaging', [LogicController::class,'messaging'])->name('messaging');
 Route::get('dashboard/schedule', [LogicController::class,'schedule'])->name('schedule');
 Route::get('dashboard/add_shift', [LogicController::class,'addshift'])->name('addshift');

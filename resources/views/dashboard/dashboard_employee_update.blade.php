@@ -44,9 +44,9 @@
                                         <thead>
                                             <tr>
                                                 <th id="general"  style="cursor:pointer" >General</th>
-                                                <th id="location"  style="cursor:pointer; background:pink" >Location</th>
+                                                <th id="location"  style="cursor:pointer; background:pink" onclick="location.reload()" ><a href="{{route('dashboard_employee_update')}}">Location</a></th>
                                                 <th id="advanced" style="cursor:pointer" onclick="loadAdvancedFormForEmployee()" >Advanced</th>
-                                                <th id="certification"  style="cursor:pointer"  >Certification</th>
+                                                <th id="certification"  style="cursor:pointer" onclick="loadCertifications()" >Certification</th>
                                                 <!--<th id="preferences" >Preferences</th>
                                                 <th id="rvv" >RVV</th>
                                                 <th id="admin" >Grant admin access</th>
