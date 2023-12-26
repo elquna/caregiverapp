@@ -451,6 +451,67 @@ function loadCertifications()
 }
 
 
+function uploadCert(addedsecond)
+{
+  var url = site + "/admin/uploadfile";
+	var xml = new XMLHttpRequest();
+	var t = document.getElementById('t_').value;
+	var image = document.getElementById("imagee").files[0];
+
+	var name = document.getElementById("name").value;
+	var certificate_date = document.getElementById("certificate_date").value;
+	var expiry_date = document.getElementById("expiry_date").value;
+	var notes = document.getElementById("notes").value;
+  var makeinactiveifexpired = document.getElementById("makeinactiveifexpired").value;
+
+  if(name == ""){  ReportError("name is required","err"); return; }
+  if(certificate_date == ""){  ReportError("certificate_date   is required","err"); return; }
+  if(expiry_date == ""){  ReportError("expiry_date   is required","err"); return; }
+  
+
+	var typ = image.type;
+
+	if(typ != "image/jpeg"  &&  typ != "image/jpg"  &&  typ != "image/png" && typ != "application/pdf")
+	{
+		 alert("Please Image should be PNG or JPG or JPEG or PDF");
+		 return;
+	}
+
+	var xml = new XMLHttpRequest();
+	xml.open("POST", url, true);
+	fd = new FormData();
+	fd.append("name",name);
+	fd.append("certificate_date",certificate_date);
+	fd.append("expiry_date", expiry_date);
+  fd.append("notes", notes);
+  fd.append("makeinactiveifexpired", makeinactiveifexpired );
+  fd.append("image", image);
+  fd.append("addedsecond",addedsecond)
+
+		 xml.setRequestHeader("X-CSRF-TOKEN", t);
+		
+		 //document.getElementById("reee").innerHTML = "Uploading Image";
+			xml.onreadystatechange = function()
+			{
+				
+				 if(xml.readyState == 4 && xml.status == 200)
+				 {
+					 sessionchecker(xml.responseText);
+					 //document.getElementById("reee").innerHTML = "";
+					// document.getElementById("areaforpix").innerHTML = xml.responseText;
+					 window.location.reload();
+				 }
+				 if(xml.status == 419)
+				 {
+
+						window.location.href = site;
+				 }
+			}
+		xml.send(fd);
+}
+
+
+
 
 
 

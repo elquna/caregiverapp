@@ -4,6 +4,38 @@
                             <h2 class="card-title">Certifications</h2>
                         </div>
                         <div class="card-body">
+
+
+                        <div class="table-responsive">
+                                    <table class="table table-bordered mb-0" style="font-size:12px">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Cert date</th>
+                                                <th>Expiry Date</th>
+                                                <th>Notes</th>
+                                                <th>File</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($certifications as $key ) {?>
+                                                <tr>
+                                                <td>{{$key->name}}</td>
+                                                <td>{{$key->certificate_date}} </td>
+                                                <td>{{$key->expiry_date}}</td>
+                                                <td>{{$key->notes}}</td>
+                                                <td>Download</td>
+                                            </tr>
+                                            <?php   } ?>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <br><br>
+
+
+
                             <span>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -36,7 +68,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="">Upload Certificate <span class="text-danger">*</span></label>
-                                            <input type="file" class="form-control"  required id="file" >
+                                            <input type="file" class="form-control"  required id="imagee" >
                                         </div>
                                     </div>
 
@@ -64,10 +96,12 @@
                                 </div>
                                 
                                 <div class="card-footer ml-auto">
-                                    <button type="submit" class="btn btn-outline-success mr-1" onclick="upload('{{$addedsecond}}')">Submit</button>
+                                    <button type="submit" class="btn btn-outline-success mr-1" onclick="uploadCert('{{$addedsecond}}')">Submit</button>
                                     <br><span id="err"></div> 
                                 </div>
                         </span>
                         </div>
                     </div>
+
+                    
                

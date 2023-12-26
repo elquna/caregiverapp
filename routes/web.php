@@ -32,6 +32,7 @@ Route::post('agency/updateemployeeadvanced', [LogicController::class,'updateempl
 Route::get('dashboard/view/employees', [LogicController::class,'viewemployees'])->name('viewemployees');
 Route::get('view_employee_details/{addedsecond}', [LogicController::class,'view_employee_details'])->name('view_employee_details');
 Route::get('agency/loadcertifications', [LogicController::class,'loadcertifications']);
+Route::post('admin/uploadfile', [LogicController::class,'uploadfile']);
 
 
 

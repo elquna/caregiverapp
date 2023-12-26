@@ -15,7 +15,8 @@ use Session;
 use URL;
 use App\Models\Zone;
 use App\Models\Timezone;
-use App\Models\ Employeecertification;
+use App\Models\Employeecertification;
+use Illuminate\Support\Facades\Storage;
 
 
 class LogicController extends Controller
@@ -347,8 +348,57 @@ class LogicController extends Controller
     $zones = Zone::where('agency_id', session('agency_id'))->get();
     $user = User::where('id',session('id'))->first();
     $agency = Agency::where('id', $user->agency_id)->first();
-    $certifications =  Employeecertification::where('addedsecond',$user->addedsecond)->get();
+    $certifications =  Employeecertification::where('addedsecond',$employee->addedsecond)->get();
     return view('dashboard.employee_cerifications')->with(['certifications'=>$certifications, 'employee'=>$employee, 'addedsecond'=>session("addedsecond"), 'staff'=>$user, 'zones'=>$zones,  'agency'=>$agency]);
   }
+
+
+  public function AWSLinkHelper()
+  {
+     return "https://" . "africansights". ".s3".".". "us-east-1" ."."."amazonaws.com/";
+     
+  }
+
+
+  public function uploadfile(Request $request)
+  {
+        $this->validate($request, [
+
+          'image' => 'required|mimes:pdf,png,jpg,jpeg',
+      ]);
+
+      
+
+           $base_location = 'uploads';
+
+            // Handle File Upload
+            if($request->hasFile('image'))
+            {
+                $file = $request->file('image');
+                $mime = $file->getClientMimeType();
+                $documentPath = $request->file('image')->store($base_location, 's3');
+                $filename = explode("/", $documentPath);
+                $filename =  $filename[1];
+                //We save new path
+              
+              
+                $awsurl = $this->AWSLinkHelper();
+                $pri = new Employeecertification();
+                $pri->certificate_date = $request->certificate_date;
+                $pri->file = $awsurl.$documentPath;
+                $pri->certificate_date = $request->certificate_date;
+                $pri->file = $awsurl.$documentPath;
+                $pri->expiry_date = $request->expiry_date;
+                $pri->notes = $request->notes;
+                $pri->name = $request->name;
+                $pri->makeinactiveifexpired = $request->makeinactiveifexpired;
+                $pri->addedsecond = $request->addedsecond;
+                $pri->addedby = session('id');
+                $pri->uploadmime = $mime;
+                $pri->save();
+            } 
+
+      }
+
 
 }
