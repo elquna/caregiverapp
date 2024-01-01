@@ -33,6 +33,9 @@ Route::get('dashboard/view/employees', [LogicController::class,'viewemployees'])
 Route::get('view_employee_details/{addedsecond}', [LogicController::class,'view_employee_details'])->name('view_employee_details');
 Route::get('agency/loadcertifications', [LogicController::class,'loadcertifications']);
 Route::post('admin/uploadfile', [LogicController::class,'uploadfile']);
+Route::get('dashboard/add_employee/{holder}/{rand}', [LogicController::class,'addemployee'])->name('addemployee');
+Route::get('dashboard/add_member/{holder}/{rand}', [LogicController::class,'addmember'])->name('addmember');
+Route::post('agencyaddmembergeneral', [LogicController::class,'addmembergeneral']);
 
 
 
@@ -44,7 +47,6 @@ Route::post('admin/uploadfile', [LogicController::class,'uploadfile']);
 
 
 
-Route::get('dashboard/add_employee/{holder}', [LogicController::class,'addemployee'])->name('addemployee');
 
 Route::get('dashboard/messaging', [LogicController::class,'messaging'])->name('messaging');
 Route::get('dashboard/schedule', [LogicController::class,'schedule'])->name('schedule');

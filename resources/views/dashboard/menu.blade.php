@@ -21,7 +21,7 @@
                 </li>
                 <li class=" nav-item"><a href="#"><i class="la la-stethoscope"></i><span class="menu-title" data-i18n="Doctors">Manage Employees </span></a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="{{route('addemployee',['holder'=>time()])}}"><i></i><span>Add Employee</span></a>
+                        <li><a class="menu-item" href="{{route('addemployee',['holder'=>time(), 'rand'=>str_shuffle('1234567890232194838339338381209337473939393839322313674809876432123456789009876')])}}"><i></i><span>Add Employee</span></a>
                         </li>
                         <li><a class="menu-item" href="{{route('viewemployees')}}"><i></i><span>View Employees</span></a>
                         </li>
@@ -31,7 +31,7 @@
 
                 <li class=" nav-item"><a href="#"><i class="la la-users"></i><span class="menu-title" data-i18n="Patients">Manage Members</span></a>
                     <ul class="menu-content">
-                        <li><a class="menu-item" href="{{route('managemember')}}"><i></i><span>Add Members</span></a>
+                        <li><a class="menu-item" href="{{route('addmember',['holder'=>time(), 'rand'=>str_shuffle('12345678902321948383393383812093374739393938393223136748098764321ABCDEFGHILKMSQZNCNEW')])}}"><i></i><span>Add Member</span></a>
                         </li>
                         <li><a class="menu-item" href="{{route('viewmembers')}}"><i></i><span>View  Members</span></a>
                         </li>

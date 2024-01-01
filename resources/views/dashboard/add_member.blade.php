@@ -3,7 +3,7 @@
     
 
    <!-- BEGIN: Content-->
-   <div class="app-content content">
+   <div class="app-content content" style="background:cyan">
         <div class="content-overlay"></div>
         <div class="content-wrapper">
             <div class="content-header row">
@@ -28,7 +28,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add Employee</h4>
+                                <h4 class="card-title">Add New MEMBER</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     
@@ -43,14 +43,15 @@
                                     <table class="table table-bordered mb-0">
                                         <thead>
                                             <tr>
-                                            <th>General</th>
+                                            
+                                                <th id="basic" style="background:cyan" >Basic Setup</th>
                                                 <th id="location" >Location</th>
                                                 <th id="advanced" >Advanced</th>
-                                                <th id="certification" >Certification</th>
-                                                <!--<th id="preferences" >Preferences</th>
-                                                <th id="rvv" >RVV</th>
-                                                <th id="admin" >Grant admin access</th>
-                                                <th id="notes" >Notes</th>-->
+                                                <th id="notes" >Notes</th>
+                                                <th id="preferences" >Care Plan docs</th>
+                                                <th id="billing" >Billing</th>
+                                                <th id="admin" >Insurance</th>
+                                                <th id="notes" >Custom Prompts</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -63,21 +64,36 @@
                                     <section id="book-appointment">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title">General</h2>
+                            <h2 class="card-title">Basic Setup</h2>
                         </div>
                         <div class="card-body">
                             <span>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">First name: <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control"  required id="firstname" >
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="lastname">Middle name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"  id="middlename" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="lastname">Lastname <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control"  id="lastname" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="">Job name: <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"  required id="jobname" >
                                         </div>
                                     </div>
 
@@ -85,7 +101,7 @@
                                 </div>
                                 <div class="row">
                                   
-                                    <div class="col-lg-3 col-md-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label for="gender">Employee zone</label>
                                             <select name="gender" id="zone_id" class="form-control">
@@ -95,91 +111,81 @@
                                                 @endforeach
                                             </select></div>
                                     </div>
-                                    <div class="col-lg-3 col-md-6">
+
+                                    <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label for="service">Language<span class="text-danger">*</span></label>
-                                            <select name="Service" class="form-control" id="language" required>
+                                            <label for="gender">Facility</label>
+                                            <select name="gender" id="facility_id" class="form-control">
                                                 <option value=""></option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
-                                        </div>
+                                                @foreach($fac as $one)
+                                                <option value="{{$one->id}}">{{$one->name}}</option>
+                                                @endforeach
+                                            </select></div>
                                     </div>
+                                    
 
-                                    <div class="col-lg-3 col-md-6">
+
+                                  
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="service">Employee Skill<span class="text-danger">*</span></label>
-                                            <select name="Service" class="form-control" id="skilled_or_noneskilled" required>
-                                                <option value=""></option>
-                                                <option>Skilled</option>
-                                                <option>None Skilled</option>
-                                            </select>
+                                            <label for="lastname">Contact Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"  id="contact_name" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3 col-md-6">
+                                      
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="service">Gender<span class="text-danger">*</span></label>
-                                            <select name="Service" class="form-control" id="gender" required>
-                                                <option value=""></option>
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                            </select>
+                                            <label for="lastname">Intake date <span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control"  id="intakedate" required>
                                         </div>
                                     </div>
 
 
-                                    <div class="col-lg-3 col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="service">Current status<span class="text-danger">*</span></label>
-                                            <select name="Service" class="form-control" id="status" required>
-                                                <option>Active</option>
-                                                <option>Inactive</option>
-                                                <option>Terminated</option>
-                                            </select>
+                                            <label for="lastname">Discharge date <span class="text-danger">*</span></label>
+                                            <input type="date" class="form-control"  id="dischargedate" required>
                                         </div>
                                     </div>
 
 
-
-                                   
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="lastname">Clock out safeguard <span class="text-danger">*</span></label>
-                                            <input type="number" class="form-control"  id="clockoutsafeguard" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="lastname">Email <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control"  id="email" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-6 col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="service">Role<span class="text-danger">*</span></label>
-                                            <select name="Service" class="form-control" id="role" required>
-                                                <option></option>
-                                                <option value="2">Agency_admin</option>
-                                                <option value="3">HR</option>
-                                                <option value="4">Nurse</option>
-                                                <option value="4">Office_Manager</option>
-                                                <option value="6">Office_Clerk</option>
-                                                <option value="7">Billing</option>
-                                                <option value="8">Scheduler</option>
-                                                <option value="9">Oncall</option>
-                                               
-                                            </select>
+                                            <label for="lastname">Physician Firstname<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"  id="physician_firstname" required>
                                         </div>
                                     </div>
 
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="lastname">Physician Lastname<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"  id="physician_lastname" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="lastname">Physician NPI<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"  id="physician_npi" required>
+                                        </div>
+                                    </div>
+                                 
+                                 
+                                 
+                            
 
                                 </div>
                                 
                                 <div class="card-footer ml-auto">
-                                    <button type="submit" class="btn btn-outline-success mr-1" onclick="addemployeegeneral('{{$addedsecond}}')">Submit</button>
+                                    <button type="submit" class="btn btn-outline-success mr-1" onclick="addmembergeneral('{{$addedtime}}')">Submit</button>
                                     <br><span id="err"></div> 
                                 </div>
                         </span>
@@ -213,7 +219,7 @@
 
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
-    <input type="text" id="addedsecond" value="{{$addedsecond}}" readonly>
+    <input type="hidden" id="addedttime" value="{{$addedtime}}" readonly>
 
 @include('dashboard.footer')
 

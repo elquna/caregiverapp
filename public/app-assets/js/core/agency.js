@@ -511,6 +511,78 @@ function uploadCert(addedsecond)
 }
 
 
+function addmembergeneral(addedtime)
+{
+  var url = site + "/agencyaddmembergeneral";
+  var xml = new XMLHttpRequest();
+  var t = document.getElementById('t_').value;
+  var xml = new XMLHttpRequest();
+  xml.open("POST", url, true);
+ 
+
+  var firstname = document.getElementById('firstname').value;
+  var lastname= document.getElementById('lastname').value;
+  var middlename = document.getElementById('middlename').value;
+  var email= document.getElementById('email').value;
+  var zone_id = document.getElementById('zone_id').value;
+  var facility_id = document.getElementById('facility_id').value;
+  var intakedate = document.getElementById('intakedate').value;
+  var dischargedate = document.getElementById('dischargedate').value;
+  var contact_name = document.getElementById('contact_name').value;
+  var physican_firstname = document.getElementById('physician_firstname').value;
+  var physican_lastname = document.getElementById('physician_lastname').value;
+  var physician_npi = document.getElementById('physician_npi').value;
+  var jobname = document.getElementById('jobname').value;
+
+
+  if(firstname == ""){  ReportError("firstname is required","err"); return; }
+  if(lastname== ""){  ReportError("lastname is required","err"); return; }
+  if(email ==""){  ReportError("email is required","err");  return; }
+  if(zone_id ==""){  alert("Please Select Zone"); return; }
+  if(facility_id ==""){  ReportError("facility_id is required","err");  return; }
+  if(middlename ==""){  ReportError("Role is required","err");  return; }
+ 
+
+ fd = new FormData();
+ fd.append("firstname",firstname);
+ fd.append("lastname",lastname);
+ fd.append("email",email);
+ fd.append("zone_id",zone_id);
+ fd.append("middlename",middlename);
+ fd.append("intakedate",intakedate);
+ fd.append("dischargedate",dischargedate);
+ fd.append("facility_id",facility_id);
+ fd.append("physician_firstname",physican_firstname);
+ fd.append("addedtime",addedtime);
+ fd.append("physician_lastname",physican_lastname);
+ fd.append("physician_npi",physician_npi);
+ fd.append("contact_name",contact_name);
+ fd.append("jobname",jobname);
+
+ xml.setRequestHeader("X-CSRF-TOKEN", t);
+ xml.onreadystatechange = function()
+ {
+     if(xml.status == 419)
+     {
+       location.reload();
+     }
+    if(xml.readyState == 4 && xml.status == 200)
+    {
+      if(xml.responseText == "yea")
+     {
+         window.location.href =  site + "/dashboard/member/update";
+     }
+     if(xml.responseText == "email taken")
+     {
+      ReportError('email taken','err') ; return;
+     }
+    
+    }
+
+ }
+ xml.send(fd);
+}
+
 
 
 

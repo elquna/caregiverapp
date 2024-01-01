@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
             $table->string('middlename')->nullable();
-            $table->integer('role')->nullable()->comments('1 for superadmin, 2 for agency admin, 3 for caregiver 4 for client');
+            $table->integer('role')->nullable()->comments('1 for superadmin');
             $table->string('random')->nullable();
             $table->string('reset_token')->nullable();
             $table->string('email')->unique();

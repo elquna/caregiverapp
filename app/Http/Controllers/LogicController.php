@@ -17,6 +17,7 @@ use App\Models\Zone;
 use App\Models\Timezone;
 use App\Models\Employeecertification;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Facility;
 
 
 class LogicController extends Controller
@@ -138,7 +139,7 @@ class LogicController extends Controller
 
    
 
-   public function addemployee($addedsecond)
+   public function addemployee($addedsecond,$rand)
    {
     if(session('id'))
     {
@@ -172,14 +173,14 @@ class LogicController extends Controller
         }
 
     
-
+        $password = substr(str_shuffle("123abcdefghjkmnopqrstu"),-5);
         $user = new User();
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->role = $request->role;
         $user->email = $request->email;
-        $user->password = bcrypt($request->addedsecond);
-        $user->random =  base64_encode($request->addedsecond);
+        $user->password = bcrypt($password);
+        $user->random =  base64_encode($password);
         $user->agency_id = session('agency_id');
 
         if($user->save())
@@ -197,6 +198,7 @@ class LogicController extends Controller
         $employee->current_status = $request->status;
         $employee->clockoutsafeguard = $request->clockoutsafeguard;
         $employee->addedsecond = $request->addedsecond;
+        $employee->addedby =  session('id');
 
           if($employee->save())
           {
@@ -399,6 +401,88 @@ class LogicController extends Controller
             } 
 
       }
+
+
+
+      public function addmember($addedtime,$rand)
+      {
+       if(session('id'))
+       {
+         $user = User::where('id',session('id'))->first();
+         $zones = Zone::where('agency_id', session('agency_id'))->get();
+         $user = User::where('id',session('id'))->first();
+         $agency = Agency::where('id', $user->agency_id)->first();
+         $state = State::where('id',$agency->state_id)->first();
+         $city = city::where('id',$agency->city_id)->first();
+         $country = Country::where('id',$agency->country_id)->first();
+         $countries = Country::all();
+         $us = Country::where('id',233)->first();
+         $otherstates = State::where('country_id', $agency->country_id)->get();
+         $othercities = City::where('state_id', $agency->state_id)->get();
+         $fac = Facility::where('agency_id', $user->agency_id)->get();
+   
+        return view('dashboard.add_member')->with(['fac'=>$fac, 'addedtime'=>$addedtime, 'staff'=>$user, 'zones'=>$zones, 'othercities'=>$othercities, 'otherstates'=>$otherstates,  'country'=>$country, 'city'=>$city, 'state'=>$state, 'us'=>$us, 'countries'=>$countries, 'agency'=>$agency]);
+       }
+       else{
+           return redirect()->route('adminlogin');
+       }
+      }
+
+      public function addmembergeneral(Request $request)
+      {
+        
+
+       $this->sessionchecker();
+        $chekemail = User::where('email',$request->email)->first();
+        if($chekemail != NULL)
+        {
+            echo "email taken"; return;
+        }
+
+    
+        $password = substr(str_shuffle("123abcdefghjkmnopqrstuvwxyz"),6);
+        $user = new User();
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        $user->role = 10;
+        $user->email = $request->email;
+        $user->password = bcrypt($password);
+        $user->random =  base64_encode($password);
+        $user->agency_id = session('agency_id');
+
+        if($user->save())
+        {
+        $mem = new Members();
+        $mem->user_id = $user->id;
+        $mem->firstname = $request->firstname;
+        $mem->lastname = $request->lastname;
+        $mem->middlename = $request->middlename;
+        $mem->email = $user->email;
+        $mem->agency_id = $user->agency_id;
+        $mem->zone_id = $request->zone_id;
+        $mem->physician_firstname = $request->physician_firstname;    
+        $mem->physician_lastname = $request->physician_lastname;
+        $mem->physician_npi = $request->physician_npi;
+        $mem->current_status = 'active';
+        $mem->default_facility = $request->facility_id;
+        $mem->addedtime = $request->addedtime;
+        $mem->jobname = $request->jobname;
+        $mem->added_by =  session('id');
+        $mem->contact_name = $request->contact_name;
+        $mem->intake_date = $request->intakedate;
+        $mem->discharge_date = $request->dischargedate;
+
+
+          if($mem->save())
+          {
+            
+            session(['addedtime'=>$request->addedtime]);
+            echo "yea";
+          }
+
+        }
+      }
+
 
 
 }
