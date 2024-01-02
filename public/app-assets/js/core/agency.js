@@ -533,6 +533,7 @@ function addmembergeneral(addedtime)
   var physican_lastname = document.getElementById('physician_lastname').value;
   var physician_npi = document.getElementById('physician_npi').value;
   var jobname = document.getElementById('jobname').value;
+  var jobcode = document.getElementById('jobcode').value;
 
 
   if(firstname == ""){  ReportError("firstname is required","err"); return; }
@@ -540,7 +541,7 @@ function addmembergeneral(addedtime)
   if(email ==""){  ReportError("email is required","err");  return; }
   if(zone_id ==""){  alert("Please Select Zone"); return; }
   if(facility_id ==""){  ReportError("facility_id is required","err");  return; }
-  if(middlename ==""){  ReportError("Role is required","err");  return; }
+  if(jobcode ==""){  ReportError("jobcode is required","err");  return; }
  
 
  fd = new FormData();
@@ -558,6 +559,7 @@ function addmembergeneral(addedtime)
  fd.append("physician_npi",physician_npi);
  fd.append("contact_name",contact_name);
  fd.append("jobname",jobname);
+ fd.append("jobcode",jobcode);
 
  xml.setRequestHeader("X-CSRF-TOKEN", t);
  xml.onreadystatechange = function()

@@ -69,6 +69,13 @@
                         <div class="card-body">
                             <span>
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="">Job Code: <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"  required id="jobcode" >
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="">First name: <span class="text-danger">*</span></label>

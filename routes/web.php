@@ -36,6 +36,7 @@ Route::post('admin/uploadfile', [LogicController::class,'uploadfile']);
 Route::get('dashboard/add_employee/{holder}/{rand}', [LogicController::class,'addemployee'])->name('addemployee');
 Route::get('dashboard/add_member/{holder}/{rand}', [LogicController::class,'addmember'])->name('addmember');
 Route::post('agencyaddmembergeneral', [LogicController::class,'addmembergeneral']);
+Route::post('viewmemberdetails/{addedtime}', [LogicController::class,'viewmemberdetails'])->name('viewmemberdetails');
 
 
 
@@ -61,7 +62,7 @@ Route::post('agency/changestate', [LogicController::class,'changestate'])->name(
 Route::post('agency/changecity', [LogicController::class,'changecity'])->name('changecity');
 Route::post('agency/updatestageone', [LogicController::class,'updatestageone'])->name('updatestageone');
 Route::get('manage/managemember', [LogicController::class,'managemember'])->name('managemember');
-Route::get('dashboard/view_members', [LogicController::class,'viewmembers'])->name('viewmembers');
+Route::get('dashboard/view/members', [LogicController::class,'viewmembers'])->name('viewmembers');
 Route::post('agency/processeditemployee', [LogicController::class,'processeditemployee'])->name('processeditemployee');
 Route::post('agency/configuration', [LogicController::class,'configuration'])->name('configuration');
 Route::post('agency/notification', [LogicController::class,'notification'])->name('notification');

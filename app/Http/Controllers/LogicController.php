@@ -471,6 +471,7 @@ class LogicController extends Controller
         $mem->contact_name = $request->contact_name;
         $mem->intake_date = $request->intakedate;
         $mem->discharge_date = $request->dischargedate;
+        $mem->jobcode = $request->jobcode;
 
 
           if($mem->save())
@@ -481,6 +482,29 @@ class LogicController extends Controller
           }
 
         }
+      }
+
+
+      public function viewmembers()
+      {
+        if(!session('id'))
+        {
+          return redirect()->route('adminlogin');
+        }
+        $mem = Members::where('agency_id', session('agency_id'))->get();
+        foreach($mem as $one)
+        {
+          $state = State::where('id', $one->state_id)->first();
+          $city = City::where('id', $one->city_id)->first();
+          $zone = Zone::where('id',$one->zone_id)->first();
+       
+    
+          $one->city = ($city == NULL)? "" : $city->name;
+          $one->state = ($state == NULL)? "" : $state->name;
+          $one->zone = ($zone == NULL)? "" : $zone->name;
+          
+        }
+        return view('dashboard.view_members')->with(['mem'=>$mem]);
       }
 
 
